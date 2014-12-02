@@ -33,6 +33,7 @@
 
   - name: Install expect to automate scripts with required input
     yum: pkg=expect state=latest
+
   - name: Install ceilometer client
     yum: pkg=python-ceilometerclient state=latest
 
