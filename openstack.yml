@@ -33,6 +33,30 @@
 
   - name: Install expect to automate scripts with required input
     yum: pkg=expect state=latest
+  - name: Install ceilometer client
+    yum: pkg=python-ceilometerclient state=latest
+
+  - name: Install cinder client
+    yum: pkg=python-cinderclient state=latest
+
+  - name: Install glance client
+    yum: pkg=python-glanceclient state=latest
+
+  - name: Install heat client
+    yum: pkg=python-heatclient state=latest
+
+  - name: Install keystone client
+    yum: pkg=python-keystoneclient state=latest
+
+  - name: Install neutron client
+    yum: pkg=python-neutronclient state=latest
+
+  - name: Install nova client
+    yum: pkg=python-novaclient state=latest
+
+  - name: Install swift client
+    yum: pkg=python-swiftclient state=latest
+
 
 - hosts: controller
   tasks:
