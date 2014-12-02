@@ -70,6 +70,16 @@ else
   printf "demo pass is $DEMO_PASS"
 fi
 
+if [[ "$(grep "GLANCE_DBPASS" ./openstack.rc)" == *"CHANGE_ME"* ]]
+then
+  printf "Enter glance pass: "
+  read GLANCE_DBPASS
+  printf "$(sed -i "s/GLANCE_DBPASS=\"CHANGE_ME\"/GLANCE_DBPASS="\"$GLANCE_DBPASS\""/g" ./openstack.rc)"
+else
+  source "./openstack.rc"
+  printf "glance dbpass is $GLANCE_DBPASS"
+fi
+
 # end of openstack.rc substitution
 source "./openstack.rc"
 source "./admin.rc"

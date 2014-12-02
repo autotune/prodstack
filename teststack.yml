@@ -1,0 +1,9 @@
+---
+- hosts: openstack
+  tasks:
+
+- hosts: controller
+  tasks: pkg=openstack-glance state=latest
+  
+
+
