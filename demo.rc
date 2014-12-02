@@ -1,0 +1,4 @@
+# demo.rc
+export DEMO_USER=demo
+export DEMO_PASS=pass
+export DEMO_EMAIL=user@example.com

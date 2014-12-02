@@ -1,0 +1,38 @@
+LOG_FILES
+=========
+/tmp/prodstack/admin_token.log - admin token
+
+INSTALLATION NOTES
+==================
+As of November 29th, 2014, this will install everything needed to get the controller node up and running.
+
+Everything is copied over to /tmp/prodstack after the initial run via ansible, so make sure to make any changes you need to make to the files are to the files in this directory before running.
+
+The first script you need to run is the name of the service you want to install, which will act as a launcher for other scripts. For this, there are typically 4 options: verify, configure, and install. Verify simply does a version check and a host check to ensure hosts are configured correctly. Configure will place the files where they need to be without actually installing anything. Instnall will verify, configure, and install everything you need to get your service up and running through Ansible and other options through the script.  
+
+You will be able to add a service node by typing in the service you want to add and then the server hostname or IP. For example, ./install.sh add_node compute 192.168.0.4. This will automatically add the IP to your ansible hosts and then run the compute ansible playbook on the new server iteself after transfering all files over to the server.
+
+PRODUCTION NOTES
+================
+By default, all database tokens are purged to save space per the guide. If you don't want to purge database tokens, set PURGE_EXPIRED_TOKENS to "NO" in the openstack.rc file in this directory before running script.
+
+DONE
+===
+1) Initial bootstrap
+2) SERVICES
+Identity
+
+TODO
+====
+1) Test under non-root user
+2) SERVICES:
+Image Service
+Compute Service
+Networking Service
+Dashboard
+Block Storage
+Object Storage
+Orchestration
+Telemetry
+Database
+3) Bats Testing

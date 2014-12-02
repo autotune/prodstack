@@ -1,0 +1,60 @@
+# script is based on the guide for readability purposes
+# so hosts may be mentioned twice. 
+
+---
+- hosts: openstack
+  tasks:
+  - copy: src=./ dest=/tmp/prodstack owner=root group=root mode=0775
+  - name: Install vim
+    yum: pkg=vim state=latest
+
+  - name: Add OpenStack Icehouse repo
+    yum: name=http://repos.fedorapeople.org/repos/openstack/openstack-icehouse/rdo-release-icehouse-3.noarch.rpm state=present
+
+  - name: Add EPEL repo
+    yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+
+  - name: Install yum-plugin-priorities
+    yum: pkg=yum-plugin-priorities state=latest
+
+  - name: Install openstack-utils 
+    yum: pkg=openstack-utils state=latest 
+
+  - name: Install qpidd-cpp-server[1]
+    yum: pkg=qpid-cpp-server state=latest
+
+  - service: name=qpidd state=started
+
+  - name: Ensure auth not enabled on templates
+    template: src=./qpidd.conf dest=/etc/qpidd.conf
+    
+  - name: Add to startup scripts
+    action: shell chkconfig qpidd on
+
+  - name: Install expect to automate scripts with required input
+    yum: pkg=expect state=latest
+
+- hosts: controller
+  tasks:
+  - name: Install mysql-server
+    yum: pkg=mysql-server state=latest
+
+  - service: name=mysqld state=started
+
+  - name: Install  identity service[1]
+    yum: pkg=openstack-keystone state=latest
+  
+  - name: Install python-keystoneclient
+    yum: pkg=python-keystoneclient state=latest
+
+  - name: Run MySQL installation script
+    command: expect /tmp/prodstack/mysql.expect
+
+  - name: Run identity.sh script
+    command: bash /tmp/prodstack/identity.sh
+
+  - service: name=openstack-keystone state=started
+
+  - name: Enable identity service on boot
+    command: chkconfig openstack-keystone on
+ 

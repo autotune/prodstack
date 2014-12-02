@@ -1,0 +1,11 @@
+# openstack.rc
+export USER=root
+export ADMIN_EMAIL="CHANGE_ME"
+export ADMIN_PASS="CHANGE_ME"
+export KEYSTONE_DBPASS="CHANGE_ME"
+# ADMIN_TOKEN=$(openssl rand -hex 10)
+export ADMIN_TOKEN="GENERATED"
+export PURGE_EXPIRED_TOKENS=YES
+export OS_SERVICE_TOKEN=$ADMIN_TOKEN
+export OS_SERVICE_ENDPOINT=http://controller:35357/v2.0
+
