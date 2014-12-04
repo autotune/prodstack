@@ -19,22 +19,22 @@ By default, all database tokens are purged to save space per the guide. If you d
 DONE
 ===
 1) Initial bootstrap
-2) SERVICES
-Identity
+2) SERVICES (service/script)
+Identity - identity.sh identity_fun.sh
 
 TODO
 ====
-1) Test under non-root user
-2) SERVICES:
-Image Service
-Compute Service
-Networking Service
-Dashboard
-Block Storage
-Object Storage
-Orchestration
-Telemetry
-Database
-3) Bats Testing
+3) Test under non-root user
+4) SERVICES:
+4.1) Image Service
+4.2) Compute Service
+4.3) Networking Service
+4.4) Dashboard
+4.5) Block Storage
+4.6) Object Storage
+4.7) Orchestration
+4.8) Telemetry
+4.8) Database
+5) Bats Testing
 
 LICENSE: GPL v2.0 (http://choosealicense.com/licenses/gpl-2.0/)
