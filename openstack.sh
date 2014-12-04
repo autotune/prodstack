@@ -12,8 +12,8 @@ then
   printf "Install will continue... \n\n"
   rm -fr $DIR
 else
-  echo "Something went wrong with verification, re-run verify.sh and fix issues to continue \n"
-  echo "$(cat ./status.tmp)"
+  printf "Something went wrong with verification, re-run verify.sh and fix issues to continue \n"
+  printf "$(cat ./status.tmp)"
   exit 1
 fi
 
@@ -35,7 +35,7 @@ then
  
 else 
   source "./openstack.rc"
-  echo "KEYSTONE_DBPASS is $KEYSTONE_DBPASS"
+  printf "KEYSTONE_DBPASS is $KEYSTONE_DBPASS"
 fi
 
 sleep 2
@@ -47,14 +47,14 @@ then
   printf "$(sed -i "s/ADMIN_PASS=\"CHANGE_ME\"/ADMIN_PASS="\"$ADMIN_PASS\""/g" ./openstack.rc)"
 else 
   source "./openstack.rc"
-  echo "ADMIN_PASS is $ADMIN_PASS"
+  printf "ADMIN_PASS is $ADMIN_PASS"
 fi
 
 if [[ "$(cat ./openstack.rc|grep "ADMIN_EMAIL")" == *"CHANGE_ME"* ]]
 then
   printf "Enter admin email: "
   read ADMIN_EMAIL
-  echo "$(sed -i "s/ADMIN_EMAIL=\"CHANGE_ME\"/ADMIN_EMAIL="\"$ADMIN_EMAIL\""/g" ./openstack.rc)"
+  printf "$(sed -i "s/ADMIN_EMAIL=\"CHANGE_ME\"/ADMIN_EMAIL="\"$ADMIN_EMAIL\""/g" ./openstack.rc)"
 else
   source "./openstack.rc"
   printf "Admin email is $ADMIN_EMAIL"
@@ -88,7 +88,7 @@ source "./demo.rc"
 # create initial files first
 if [[ ! -e "/$USER/.my.cnf" ]]
 then
-  echo "" > "/$USER/.my.cnf"
+  printf "" > "/$USER/.my.cnf"
 fi
 
 sleep 2 

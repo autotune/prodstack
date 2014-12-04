@@ -33,13 +33,19 @@ else
   printf "RHEL required\n"
 fi
 
+printf "$(pkill yum)"
+
 # check for and install initial packages
-if [[ $(rpm -q ansible) == *"not installed"* ]]
+if [[ $(rpm -q ansible) != *"ansible-"* ]]
 then
   printf "Requires ansible to run, installing... \n\n"
-  "$(yum install ansible -y)"
+elif [[ $(yum repolist|grep epel) != *"epel"* ]]
+then
+  printf "epel not installed, installing epel... \n\n"
+  printf "$(rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm)"
+  printf "$(yum clean all)"
 fi
-
+  printf "$(yum install ansible -y)"
 # allow local ssh access
 printf "Generating ssh key\n\n"
 printf "$(ssh-keygen -t rsa -N "" -f $USER/.ssh/id_rsa)"
