@@ -1,3 +1,5 @@
+NOTE: THIS SCRIPT IS NOT READY FOR PRODUCTION YET, nor even in "alpha" stage as it is still being developed. Use at your own risk. 
+
 LOG_FILES
 =========
 /tmp/prodstack/admin_token.log - admin token
